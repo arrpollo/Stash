@@ -6,7 +6,7 @@ A local Chrome extension for finding your saved Reddit posts and comments, espec
 
 Use, modify, and share Stash under the [MIT license](LICENSE). Keep the copyright and license notice when redistributing it. Bundled fonts retain their own SIL Open Font Licenses.
 
-[Download the source ZIP](https://github.com/arrpollo/Stash/archive/refs/heads/main.zip) · [Source code](https://github.com/arrpollo/Stash)
+[Website](https://stashreddit.vercel.app) · [Download the source ZIP](https://github.com/arrpollo/Stash/archive/refs/heads/main.zip) · [Source code](https://github.com/arrpollo/Stash)
 
 ## Install in Chrome
 
