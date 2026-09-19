@@ -1,0 +1,11 @@
+import fs from 'node:fs/promises';
+import { execFileSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
+const root = fileURLToPath(new URL('../', import.meta.url));
+const output = fileURLToPath(new URL('../dist/', import.meta.url));
+await fs.mkdir(output, { recursive: true });
+const manifest = JSON.parse(await fs.readFile(new URL('../extension/manifest.json', import.meta.url), 'utf8'));
+const archive = output + 'stash-for-reddit-' + manifest.version + '.zip';
+await fs.rm(archive, { force: true });
+execFileSync('zip', ['-qr', archive, 'extension', 'README.md', 'PRIVACY.md', 'LICENSE', '-x', '*/.DS_Store'], { cwd: root });
+console.log('Packaged: ' + archive);

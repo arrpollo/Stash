@@ -1,0 +1,19 @@
+# Stash privacy notice
+
+Stash is an independent local extension and is not affiliated with Reddit.
+
+The extension stores your Reddit username, saved post/comment text and metadata (including available thumbnail URLs and media types), favorites, reading status, sync time, and settings in Chrome’s local extension storage. This data is not sent to an app server or Chrome Sync.
+
+When you choose to sync, it contacts Reddit directly using your browser’s signed-in session. It reads your session identity and saved listing. When you explicitly confirm “Unsave from Reddit,” it sends an unsave request to Reddit. Temporary Reddit session tokens used for that request are not persisted or included in backups. The extension does not read cookie values or passwords.
+
+Media thumbnails are on by default and can be turned off in Settings & backups. An existing choice to turn thumbnails off is preserved. While enabled, the browser requests visible previews directly from Reddit’s image servers: preview.redd.it, external-preview.redd.it, i.redd.it, a.thumbs.redditmedia.com, b.thumbs.redditmedia.com, and i.redditmedia.com. Those servers receive the requested image URL and normal connection information, such as your IP address. Image requests use a no-referrer policy. The separate “Show NSFW thumbnails” switch is off by default: NSFW previews are requested only when you reveal one or enable that switch. Spoiler previews still require an individual reveal. Disabling media thumbnails stops future preview loads, including NSFW previews; images already requested may remain in the browser cache. Videos and GIFs use still previews, with no video playback.
+
+Opening a Reddit link visits Reddit and is subject to Reddit’s own policies. There is no third-party tracking, analytics, hosted app backend, or remote executable code. Atkinson Hyperlegible and Lexend fonts are bundled locally and do not make font-service requests.
+
+On www.reddit.com, Stash adds a **Play Reddit copy** button to supported RedGIFs posts, including cards in Saved and other feeds. It also observes explicit loading errors in RedGIFs embedded players, using a content script limited to HTTPS redgifs.com/ifr/* and www.redgifs.com/ifr/*. It does not run on watch pages or report standalone tabs. The error signal is relayed locally through Stash only to the Reddit page in the same tab and matched to that player’s post card; no error text, video content, or library data is sent to another server.
+
+After a detected error or a manual click, Stash requests that post’s JSON from Reddit using the existing browser session, then plays an available MP4 from v.redd.it inside the post. Automatic lookups wait for the card to be onscreen; at most two run together. Automatic playback starts muted, and replacement videos pause offscreen or when the tab is hidden. No post-data or video request is made by this feature before a detected error or a click. Reddit receives normal connection information and may receive the page referrer during playback. The content scripts do not read the saved library, cookie values, or passwords. They do not persist post data or video files. **Original player** stops that card’s replacement playback, restores its original embed, and prevents another automatic attempt until you leave or refresh the page. This is separate from the still-image thumbnails in Stash’s library.
+
+Backup files include your username, cached Reddit text and metadata, available thumbnail URLs, and local annotations. They do not embed image files. They are ordinary, unencrypted JSON files saved to your chosen download location. Importing is processed locally and never modifies your Reddit saves; imported thumbnails follow the same preview setting.
+
+“Clear local library” deletes the extension’s saved library and annotations from this browser. Uninstalling the extension also removes local extension storage. Previously exported backup files remain wherever you saved them.

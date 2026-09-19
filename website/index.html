@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Stash — Free, open-source saved posts for Reddit</title>
+<meta name="description" content="A free, open-source Chrome extension by Arthit Napradit. Search your saved Reddit posts, filter by subreddit, and keep your reading list local." />
+<meta name="author" content="Arthit Napradit" />
+<link rel="icon" href="assets/stash-icon-128.png" type="image/png" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #faf9f6; color: #292b26; font-family: Inter, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 18px; line-height: 1.65; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  a { color: #dc5632; text-decoration: none; }
+  a:hover { color: #b8421f; text-decoration: underline; }
+  h1, h2, h3 { font-family: Manrope, "Segoe UI", system-ui, sans-serif; font-weight: 700; margin: 0; letter-spacing: -0.01em; text-wrap: pretty; }
+  p { margin: 0; text-wrap: pretty; }
+  img { display: block; max-width: 100%; }
+  summary { cursor: pointer; list-style: none; }
+  summary::-webkit-details-marker { display: none; }
+  details[open] .om-plus { transform: rotate(45deg); }
+</style>
+<style>
+  @font-face { font-family: "Manrope"; font-style: normal; font-weight: 200 800; font-display: swap; src: url("fonts/Manrope.woff2") format("woff2"); }
+  @font-face { font-family: "Inter"; font-style: normal; font-weight: 100 900; font-display: swap; src: url("fonts/Inter.woff2") format("woff2"); }
+  :focus-visible { outline: 3px solid #b8421f; outline-offset: 5px; }
+  section[id] { scroll-margin-top: 140px; }
+  a[style*="#dc5632"]:hover, a[style*="#292b26"]:hover { text-decoration: none; filter: brightness(0.94); }
+  details summary:hover { color: #b8421f; }
+</style>
+</head>
+<body>
+<div style="width: 100%; max-width: 100%; overflow-x: hidden;">
+
+  <header style="position: sticky; top: 0; z-index: 20; background: rgba(250, 249, 246, 0.94); backdrop-filter: blur(8px); border-bottom: 1px solid #e4e1d8;">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 10px 20px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+      <a href="#top" style="display: flex; align-items: center; gap: 10px; color: #292b26; text-decoration: none;">
+        <img src="assets/stash-icon-128.png" alt="Stash" width="30" height="30" style="width: 30px; height: 30px; border-radius: 8px;" />
+        <span style="font-family: Manrope, system-ui, sans-serif; font-weight: 700; font-size: 22px; letter-spacing: -0.02em;">stash<span style="color: #dc5632;">.</span></span>
+      </a>
+      <nav style="display: flex; gap: 18px; align-items: center; font-size: 15px; margin-left: auto; flex-wrap: wrap; row-gap: 4px;">
+        <a href="#features" style="color: #5c5f58; padding: 13px 0;">Features</a>
+        <a href="#steps" style="color: #5c5f58; padding: 13px 0;">How it works</a>
+        <a href="#faq" style="color: #5c5f58; padding: 13px 0;">FAQ</a>
+        <a href="privacy.html" style="color: #5c5f58; padding: 13px 0;">Privacy</a>
+        <a href="https://github.com/arrpollo/Stash" style="background: #dc5632; color: #faf9f6; padding: 13px 20px; border-radius: 999px; font-size: 15px; font-weight: 600;">Download on GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <section id="top" style="max-width: 1120px; margin: 0 auto; padding: 60px 20px 8px;">
+    <div style="display: flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #5b7662;">
+      <span style="width: 6px; height: 6px; border-radius: 50%; background: #5b7662; flex: none;"></span>
+      Free &amp; open source · Chrome extension
+    </div>
+    <h1 style="font-size: clamp(32px, 5.2vw, 52px); line-height: 1.12; letter-spacing: -0.02em; margin-top: 18px; max-width: 20em;">Find that Reddit post you saved<span style="color: #dc5632;">.</span></h1>
+    <p style="font-size: clamp(17px, 1.6vw, 20px); line-height: 1.65; color: #3c3f38; max-width: 34em; margin-top: 20px;">Turn your saved posts and comments into a searchable library. Filter by subreddit, keep your favorites close, and finally get through your reading list.</p>
+    <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-top: 28px;">
+      <a href="https://github.com/arrpollo/Stash" style="background: #dc5632; color: #faf9f6; padding: 15px 26px; border-radius: 999px; font-weight: 600; font-size: 17px;">Download on GitHub</a>
+      <a href="#steps" style="padding: 15px 22px; border-radius: 999px; border: 1px solid #d8d4c9; color: #292b26; font-size: 17px;">See how it works</a>
+    </div>
+    
+      <p style="font-size: 14px; line-height: 1.6; color: #5c5f58; margin-top: 16px; max-width: 30em;">Free to use, modify, and share under the MIT license. Created by <a href="https://github.com/arrpollo">Arthit Napradit</a>. Install from GitHub in Chrome 120 or newer.</p>
+    
+    
+  </section>
+
+  <section style="max-width: 1240px; margin: 0 auto; padding: 36px 20px 0;">
+    <div style="border: 1px solid #e4e1d8; border-radius: 18px; background: #ffffff; padding: 10px; box-shadow: 0 30px 60px -40px rgba(41, 43, 38, 0.45);">
+      <div style="display: flex; align-items: center; gap: 7px; padding: 6px 8px 12px;">
+        <span style="width: 9px; height: 9px; border-radius: 50%; background: #e4e1d8; flex: none;"></span>
+        <span style="width: 9px; height: 9px; border-radius: 50%; background: #e4e1d8; flex: none;"></span>
+        <span style="width: 9px; height: 9px; border-radius: 50%; background: #e4e1d8; flex: none;"></span>
+        <span style="margin-left: 8px; font-size: 12px; color: #8c8f86; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;">Stash library · sample library shown</span>
+      </div>
+      <img src="assets/stash-desktop.png" alt="The Stash library showing saved Reddit posts in a grid, with a subreddit sidebar and search field" style="width: 100%; border-radius: 10px; border: 1px solid #edeae1;" />
+    </div>
+    <p style="font-size: 13px; color: #8c8f86; margin-top: 12px; text-align: center;">Screenshots show Stash’s fictional sample library.</p>
+  </section>
+
+  <section style="border-top: 1px solid #e4e1d8; border-bottom: 1px solid #e4e1d8; margin-top: 60px; background: #f5f3ee;">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 40px 20px; display: grid; gap: 28px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));">
+      <div>
+        <h3 style="font-size: 19px;">Search what you saved</h3>
+        <p style="font-size: 15px; line-height: 1.6; color: #5c5f58; margin-top: 7px;">Titles, post text, saved comments, subreddits, and authors.</p>
+      </div>
+      <div>
+        <h3 style="font-size: 19px;">Filter by subreddit</h3>
+        <p style="font-size: 15px; line-height: 1.6; color: #5c5f58; margin-top: 7px;">Pick one community or several and narrow from there.</p>
+      </div>
+      <div>
+        <h3 style="font-size: 19px;">Favorites and a queue</h3>
+        <p style="font-size: 15px; line-height: 1.6; color: #5c5f58; margin-top: 7px;">Star the best finds. Move the rest from To read to Finished.</p>
+      </div>
+      <div>
+        <h3 style="font-size: 19px;">Stays in your browser</h3>
+        <p style="font-size: 15px; line-height: 1.6; color: #5c5f58; margin-top: 7px;">Your library lives in this Chrome profile. No Stash account.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="features" style="max-width: 1120px; margin: 0 auto; padding: 72px 20px 0; display: grid; gap: 56px;">
+
+    <div style="background: #f6f4ef; border: 1px solid #e4e1d8; border-radius: 20px; padding: clamp(24px, 3vw, 40px); display: grid; gap: 36px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); align-items: start;">
+      <div>
+        <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #dc5632;">01 — Search and filter</span>
+        <h2 style="font-size: clamp(28px, 3.2vw, 40px); line-height: 1.15; margin-top: 12px;">Less scrolling. More finding.</h2>
+        <p style="font-size: 17px; line-height: 1.65; color: #3c3f38; margin-top: 16px;">Type a few words and Stash matches all of them against titles, post text, saved comments, subreddits, and authors. Select one subreddit or several, and the other filters narrow whatever is selected.</p>
+      </div>
+      <div>
+        <div style="position: relative; width: 100%; aspect-ratio: 620 / 125; overflow: hidden; border-radius: 12px; border: 1px solid #ddd9ce; background: #fff;">
+          <img src="assets/stash-filtered.png" alt="Search field with two subreddit filter chips applied above the filtered results" style="position: absolute; max-width: none; width: 232.3%; left: -45.2%; top: -316.8%;" />
+        </div>
+        <p style="font-size: 13px; color: #8c8f86; margin-top: 10px;">Search plus two subreddit filters, narrowed to six items.</p>
+      </div>
+    </div>
+
+    <div style="background: #fbf9f4; border: 1px solid #e4e1d8; border-radius: 20px; padding: clamp(24px, 3vw, 40px); display: grid; gap: 36px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); align-items: start;">
+      <div>
+        <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #dc5632;">02 — Favorites and reading queue</span>
+        <h2 style="font-size: clamp(28px, 3.2vw, 40px); line-height: 1.15; margin-top: 12px;">Make room for your best finds.</h2>
+        <p style="font-size: 17px; line-height: 1.65; color: #3c3f38; margin-top: 16px;">Star an item to keep it in Favorites without touching its saved status on Reddit. Everything else waits in To read until you mark it Finished yourself.</p>
+      </div>
+      <div style="display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); align-items: start;">
+        <div>
+          <div style="position: relative; width: 100%; aspect-ratio: 1; overflow: hidden; border-radius: 12px; border: 1px solid #ddd9ce; background: #f1efe8;">
+            <img src="assets/stash-desktop.png" alt="Library sidebar showing All saved, Favorites, To read, and Finished with their counts" style="position: absolute; max-width: none; width: 669.8%; left: -9.3%; top: -62.8%;" />
+          </div>
+          <p style="font-size: 13px; color: #8c8f86; margin-top: 10px;">Library sidebar: Favorites, To read, Finished.</p>
+        </div>
+        <div>
+          <div style="position: relative; width: 100%; aspect-ratio: 360 / 88; overflow: hidden; border-radius: 12px; border: 1px solid #ddd9ce; background: #fff;">
+            <img src="assets/stash-desktop.png" alt="A saved post card with its star control in the top corner" style="position: absolute; max-width: none; width: 400%; left: -80.6%; top: -590.9%;" />
+          </div>
+          <p style="font-size: 13px; color: #8c8f86; margin-top: 10px;">A starred card, saved status on Reddit unchanged.</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="background: #f6f4ef; border: 1px solid #e4e1d8; border-radius: 20px; padding: clamp(24px, 3vw, 40px); display: grid; gap: 36px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); align-items: start;">
+      <div>
+        <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #dc5632;">03 — Layout and reading</span>
+        <h2 style="font-size: clamp(28px, 3.2vw, 40px); line-height: 1.15; margin-top: 12px;">Read it your way.</h2>
+        <p style="font-size: 17px; line-height: 1.65; color: #3c3f38; margin-top: 16px;">Switch between a grid of cards and a full-width list. Then set the display size, reading font, page size, paged or continuous browsing, and optional thumbnails.</p>
+      </div>
+      <div style="display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); align-items: start;">
+        <div>
+          <div style="position: relative; width: 100%; aspect-ratio: 620 / 280; overflow: hidden; border-radius: 12px; border: 1px solid #ddd9ce; background: #fff;">
+            <img src="assets/stash-list.png" alt="List view showing saved posts as full-width rows" style="position: absolute; max-width: none; width: 232.3%; left: -46.8%; top: -185.7%;" />
+          </div>
+          <p style="font-size: 13px; color: #8c8f86; margin-top: 10px;">List view</p>
+        </div>
+        <div>
+          <div style="position: relative; width: 100%; aspect-ratio: 700 / 545; overflow: hidden; border-radius: 12px; border: 1px solid #ddd9ce; background: #fff;">
+            <img src="assets/stash-browsing-settings.png" alt="Display settings with browsing style, posts per page, and media thumbnails" style="position: absolute; max-width: none; width: 114.3%; left: -8.6%; top: -14.5%;" />
+          </div>
+          <p style="font-size: 13px; color: #8c8f86; margin-top: 10px;">Reading settings</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width: 1120px; margin: 0 auto; padding: 72px 20px 0;">
+    <div style="background: #f8e4d9; border-radius: 20px; padding: clamp(24px, 5vw, 56px); display: grid; gap: 36px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));">
+      <div>
+        <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #b8421f;">Your library, locally</span>
+        <h2 style="font-size: clamp(26px, 3vw, 38px); line-height: 1.15; margin-top: 12px;">Your library. In your browser.</h2>
+        <p style="font-size: 17px; line-height: 1.65; color: #3c3f38; margin-top: 16px;">Saved text, favorites, and reading status stay in Chrome’s local storage for this profile. No Stash account, no hosted backend, no analytics.</p>
+        <p style="font-size: 16px; line-height: 1.65; color: #5c4a42; margin-top: 14px;">Local does not mean nothing leaves your machine: sync and unsave go to Reddit, and thumbnails load from Reddit’s image servers when enabled. Cached text stays searchable offline; media may not.</p>
+      </div>
+      <div style="display: grid; gap: 14px; align-content: start;">
+        <div style="background: #faf9f6; border-radius: 14px; padding: 20px 22px;">
+          <h3 style="font-size: 18px;">Backups you control</h3>
+          <p style="font-size: 15px; line-height: 1.6; color: #5c5f58; margin-top: 6px;">Export a Stash JSON file from Settings &amp; backups. Importing merges the same account’s items and never changes your Reddit saves.</p>
+        </div>
+        <div style="background: #faf9f6; border-radius: 14px; padding: 20px 22px;">
+          <h3 style="font-size: 18px;">A sample library to try</h3>
+          <p style="font-size: 15px; line-height: 1.6; color: #5c5f58; margin-top: 6px;">Fictional example posts, kept separate from your real library. No account requests run in sample mode.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="steps" style="max-width: 1120px; margin: 0 auto; padding: 72px 20px 0;">
+    <h2 style="font-size: clamp(28px, 3.4vw, 42px); line-height: 1.15;">Three steps to your library.</h2>
+    <div style="display: grid; gap: 28px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); margin-top: 36px;">
+      <div style="border-top: 2px solid #292b26; padding-top: 18px;">
+        <span style="font-size: 14px; font-weight: 600; color: #dc5632;">01</span>
+        <h3 style="font-size: 22px; margin-top: 8px;">Install Stash and pin it</h3>
+        <p style="font-size: 16px; line-height: 1.65; color: #3c3f38; margin-top: 10px;"><a href="https://github.com/arrpollo/Stash">Download Stash from GitHub</a>, unzip it, and load the extension folder in Chrome. Chrome 120 or newer.</p>
+      </div>
+      <div style="border-top: 2px solid #292b26; padding-top: 18px;">
+        <span style="font-size: 14px; font-weight: 600; color: #dc5632;">02</span>
+        <h3 style="font-size: 22px; margin-top: 8px;">Sign in to Reddit in the same profile</h3>
+        <p style="font-size: 16px; line-height: 1.65; color: #3c3f38; margin-top: 10px;">Stash uses the Reddit session already in this Chrome profile. No Stash account, no password, no API key.</p>
+      </div>
+      <div style="border-top: 2px solid #292b26; padding-top: 18px;">
+        <span style="font-size: 14px; font-weight: 600; color: #dc5632;">03</span>
+        <h3 style="font-size: 22px; margin-top: 8px;">Click Sync Reddit</h3>
+        <p style="font-size: 16px; line-height: 1.65; color: #3c3f38; margin-top: 10px;">Sync is manual. Keep the library tab open until it finishes; closing it keeps the last saved library.</p>
+      </div>
+    </div>
+    
+      <details style="margin-top: 32px; border: 1px solid #d8d4c9; border-radius: 14px; background: #f5f3ee; padding: 18px 22px;">
+        <summary style="display: flex; gap: 14px; align-items: center; font-size: 17px; font-weight: 600; color: #292b26;">
+          <span class="om-plus" style="color: #dc5632; font-size: 20px; line-height: 1; transition: transform 0.15s ease;">+</span>
+          Install from GitHub
+        </summary>
+        <div style="margin-top: 14px; display: grid; gap: 10px; font-size: 16px; line-height: 1.65; color: #3c3f38;">
+          <p>While there is no Chrome Web Store listing, Stash loads as an unpacked extension:</p>
+          <p>1. Open <a href="https://github.com/arrpollo/Stash">Stash on GitHub</a>, choose Code → Download ZIP, and unzip it. Keep the extension folder somewhere permanent.</p>
+          <p>2. Open chrome://extensions and enable Developer mode.</p>
+          <p>3. Click Load unpacked and select the extension folder, the one containing manifest.json.</p>
+          <p>4. Pin Stash from Chrome’s Extensions menu, then sign in to Reddit in the same profile and click Sync Reddit.</p>
+          <p style="color: #5c5f58;">To update, replace the files in the same folder, click Reload on chrome://extensions, then reopen the Stash tab. Reloading keeps your local library; uninstalling or clearing its data does not.</p>
+        </div>
+      </details>
+    
+  </section>
+
+  <section id="faq" style="max-width: 900px; margin: 0 auto; padding: 72px 20px 0;">
+    <h2 style="font-size: clamp(28px, 3.4vw, 42px); line-height: 1.15;">Honest answers.</h2>
+    <div style="margin-top: 28px; border-top: 1px solid #e4e1d8;">
+      <details open="" style="border-bottom: 1px solid #e4e1d8; padding: 20px 0;">
+        <summary style="display: flex; gap: 14px; align-items: baseline; font-family: Manrope, system-ui, sans-serif; font-weight: 600; font-size: 20px;">
+          <span class="om-plus" style="color: #dc5632; font-size: 20px; line-height: 1.2; transition: transform 0.15s ease;">+</span>
+          Will Stash find everything I have ever saved?
+        </summary>
+        <p style="font-size: 17px; line-height: 1.65; color: #3c3f38; margin-top: 12px; padding-left: 28px;">No. Reddit may return only a limited portion of your saved history. Stash follows every pagination cursor Reddit offers and reports how many items it fetched, but it cannot recover saves Reddit does not expose. Items missing from a later sync stay in your library with a Previously cached label, listed after the current results.</p>
+      </details>
+      <details style="border-bottom: 1px solid #e4e1d8; padding: 20px 0;">
+        <summary style="display: flex; gap: 14px; align-items: baseline; font-family: Manrope, system-ui, sans-serif; font-weight: 600; font-size: 20px;">
+          <span class="om-plus" style="color: #dc5632; font-size: 20px; line-height: 1.2; transition: transform 0.15s ease;">+</span>
+          Does it work offline, and does it sync by itself?
+        </summary>
+        <p style="font-size: 17px; line-height: 1.65; color: #3c3f38; margin-top: 12px; padding-left: 28px;">Cached text stays searchable without a connection and the bundled fonts load locally; thumbnails and media need a connection or a cached copy. Sync is never automatic: you click Sync Reddit, and it runs in the library tab, so keep that tab open until it completes. Retries respect short Reddit rate-limit delays and otherwise stop with a readable error.</p>
+      </details>
+      <details style="border-bottom: 1px solid #e4e1d8; padding: 20px 0;">
+        <summary style="display: flex; gap: 14px; align-items: baseline; font-family: Manrope, system-ui, sans-serif; font-weight: 600; font-size: 20px;">
+          <span class="om-plus" style="color: #dc5632; font-size: 20px; line-height: 1.2; transition: transform 0.15s ease;">+</span>
+          Do I need a Stash account?
+        </summary>
+        <p style="font-size: 17px; line-height: 1.65; color: #3c3f38; margin-top: 12px; padding-left: 28px;">No. There is no separate account, no sign-up, and no API key. Stash uses your existing Reddit login in the same Chrome profile, and your library never leaves that profile unless you export a backup yourself.</p>
+      </details>
+      <details style="border-bottom: 1px solid #e4e1d8; padding: 20px 0;">
+        <summary style="display: flex; gap: 14px; align-items: baseline; font-family: Manrope, system-ui, sans-serif; font-weight: 600; font-size: 20px;">
+          <span class="om-plus" style="color: #dc5632; font-size: 20px; line-height: 1.2; transition: transform 0.15s ease;">+</span>
+          What can I customize, and can I undo it?
+        </summary>
+        <p style="font-size: 17px; line-height: 1.65; color: #3c3f38; margin-top: 12px; padding-left: 28px;">Display size runs from 100% to 200% and enlarges text, controls, icons, and the sidebar together. There are six reading fonts, with a separate choice for post titles or Match reading font; Atkinson Hyperlegible and Lexend are bundled and work offline. Page size can be 15, 30, 60, or 100 items, with paged browsing or continuous scrolling. Reset display settings restores the original size and fonts without clearing your library or other preferences.</p>
+      </details>
+      <details style="border-bottom: 1px solid #e4e1d8; padding: 20px 0;">
+        <summary style="display: flex; gap: 14px; align-items: baseline; font-family: Manrope, system-ui, sans-serif; font-weight: 600; font-size: 20px;">
+          <span class="om-plus" style="color: #dc5632; font-size: 20px; line-height: 1.2; transition: transform 0.15s ease;">+</span>
+          Can Stash change or remove my Reddit saves?
+        </summary>
+        <p style="font-size: 17px; line-height: 1.65; color: #3c3f38; margin-top: 12px; padding-left: 28px;">Only when you explicitly confirm Unsave from Reddit, which removes the item from Reddit and your local copy after checking which account is signed in. Starring, reading status, and importing a backup never change anything on Reddit.</p>
+      </details>
+      <details style="border-bottom: 1px solid #e4e1d8; padding: 20px 0;">
+        <summary style="display: flex; gap: 14px; align-items: baseline; font-family: Manrope, system-ui, sans-serif; font-weight: 600; font-size: 20px;">
+          <span class="om-plus" style="color: #dc5632; font-size: 20px; line-height: 1.2; transition: transform 0.15s ease;">+</span>
+          What happens to my library if I reinstall?
+        </summary>
+        <p style="font-size: 17px; line-height: 1.65; color: #3c3f38; margin-top: 12px; padding-left: 28px;">Uninstalling the extension or clearing its data deletes the local library, so export a backup first. Backups are ordinary unencrypted JSON files saved wherever you choose, containing cached text, favorites, and reading status. Importing merges the same account’s items and is processed locally.</p>
+      </details>
+      <details style="border-bottom: 1px solid #e4e1d8; padding: 20px 0;">
+        <summary style="display: flex; gap: 14px; align-items: baseline; font-family: Manrope, system-ui, sans-serif; font-weight: 600; font-size: 20px;">
+          <span class="om-plus" style="color: #dc5632; font-size: 20px; line-height: 1.2; transition: transform 0.15s ease;">+</span>
+          What is the RedGIFs playback fallback?
+        </summary>
+        <p style="font-size: 17px; line-height: 1.65; color: #3c3f38; margin-top: 12px; padding-left: 28px;">A secondary feature on www.reddit.com. When a RedGIFs embed reports a loading error, Stash can try Reddit’s own retained copy of that video in the post or feed card, and a Play Reddit copy button is available for manual retries. It works only when Reddit still provides a playable copy, previews may be shorter or silent, and it does not repair RedGIFs. Automatic playback starts muted; Original player switches back. Old Reddit is not supported by this control.</p>
+      </details>
+      <details style="border-bottom: 1px solid #e4e1d8; padding: 20px 0;">
+        <summary style="display: flex; gap: 14px; align-items: baseline; font-family: Manrope, system-ui, sans-serif; font-weight: 600; font-size: 20px;">
+          <span class="om-plus" style="color: #dc5632; font-size: 20px; line-height: 1.2; transition: transform 0.15s ease;">+</span>
+          Is Stash connected to Reddit?
+        </summary>
+        <p style="font-size: 17px; line-height: 1.65; color: #3c3f38; margin-top: 12px; padding-left: 28px;">No. Stash is an independent extension and is not affiliated with, endorsed by, or sponsored by Reddit. It calls Reddit’s session-authenticated JSON endpoints with your existing browser login, which relies on Reddit continuing to permit that access. It does not bypass Reddit access restrictions and is not a guarantee of API availability.</p>
+      </details>
+    </div>
+    <p style="font-size: 15px; line-height: 1.65; color: #5c5f58; margin-top: 22px;">More detail on storage, requests, and permissions is in the <a href="privacy.html">privacy notice</a>.</p>
+  </section>
+
+  <section style="max-width: 1120px; margin: 0 auto; padding: 72px 20px 0;">
+    <div style="background: #292b26; color: #faf9f6; border-radius: 20px; padding: clamp(28px, 6vw, 64px); text-align: center;">
+      <h2 style="font-size: clamp(28px, 4vw, 46px); line-height: 1.12; color: #faf9f6;">Saved for a reason<span style="color: #dc5632;">.</span></h2>
+      
+        <p style="font-size: 17px; line-height: 1.65; color: #d9d7cf; max-width: 32em; margin: 18px auto 0;">All those good finds deserve somewhere to be found again. Get Stash for free, explore the source, and make it your own.</p>
+      
+      
+      <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 28px;">
+        <a href="https://github.com/arrpollo/Stash" style="background: #dc5632; color: #faf9f6; padding: 15px 28px; border-radius: 999px; font-weight: 600; font-size: 17px;">Download on GitHub</a>
+        <a href="privacy.html" style="padding: 15px 24px; border-radius: 999px; border: 1px solid #55584f; color: #faf9f6; font-size: 17px;">Read the privacy notice</a>
+      </div>
+    </div>
+  </section>
+
+  <footer style="margin-top: 80px; border-top: 1px solid #e4e1d8; background: #f5f3ee;">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 44px 20px; display: grid; gap: 32px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));">
+      <div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <img src="assets/stash-icon-128.png" alt="" width="26" height="26" style="width: 26px; height: 26px; border-radius: 7px;" />
+          <span style="font-family: Manrope, system-ui, sans-serif; font-weight: 700; font-size: 20px; letter-spacing: -0.02em;">stash<span style="color: #dc5632;">.</span></span>
+        </div>
+        <p style="font-size: 14px; line-height: 1.6; color: #5c5f58; margin-top: 12px; max-width: 26em;">Stash is an independent local Chrome extension for finding your saved Reddit posts and comments. It is not affiliated with, endorsed by, or sponsored by Reddit. “Reddit” is a trademark of Reddit, Inc.</p>
+      </div>
+      <div style="display: grid; gap: 9px; font-size: 15px; align-content: start;">
+        <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #8c8f86;">Product</span>
+        <a href="#features" style="color: #4a4d46;">Features</a>
+        <a href="#steps" style="color: #4a4d46;">How it works</a>
+        <a href="#faq" style="color: #4a4d46;">FAQ</a>
+      </div>
+      <div style="display: grid; gap: 9px; font-size: 15px; align-content: start;">
+        <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #8c8f86;">Details</span>
+        <a href="privacy.html" style="color: #4a4d46;">Privacy notice</a>
+        <span style="color: #5c5f58;">Local library · no analytics</span>
+        <span style="color: #5c5f58;">Chrome 120 or newer</span>
+        <a href="https://github.com/arrpollo/Stash" style="color: #4a4d46;">Source code on GitHub</a>
+      </div>
+    </div>
+    <div style="max-width: 1120px; margin: 0 auto; padding: 0 20px 40px; font-size: 13px; color: #8c8f86;">
+      
+        <span>© 2026 <a href="https://github.com/arrpollo">Arthit Napradit</a>. Free and open source under the <a href="https://github.com/arrpollo/Stash/blob/main/LICENSE">MIT license</a>.</span>
+      
+      
+    </div>
+  </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+{
+  "manifest_version": 3,
+  "name": "Stash \u2014 Saved posts for Reddit",
+  "version": "1.2.3",
+  "description": "Find your saved Reddit posts and comments. Filter by subreddit, search, favorite, track reading, and back up your library locally.",
+  "minimum_chrome_version": "120",
+  "permissions": [
+    "storage",
+    "unlimitedStorage"
+  ],
+  "host_permissions": [
+    "https://www.reddit.com/*",
+    "https://old.reddit.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.reddit.com/*"
+      ],
+      "js": [
+        "content/playback-data.js",
+        "content/reddit-playback.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://www.redgifs.com/ifr/*",
+        "https://redgifs.com/ifr/*"
+      ],
+      "js": [
+        "content/embed-health.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "Open your Stash",
+    "default_icon": {
+      "16": "icons/16.png",
+      "32": "icons/32.png"
+    }
+  },
+  "icons": {
+    "16": "icons/16.png",
+    "32": "icons/32.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "content_security_policy": {
+    "extension_pages": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://preview.redd.it https://external-preview.redd.it https://i.redd.it https://a.thumbs.redditmedia.com https://b.thumbs.redditmedia.com https://i.redditmedia.com; connect-src https://www.reddit.com https://old.reddit.com; object-src 'none'; base-uri 'none';"
+  },
+  "author": "Arthit Napradit",
+  "homepage_url": "https://github.com/arrpollo/Stash"
+}

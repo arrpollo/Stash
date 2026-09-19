@@ -1,0 +1,21 @@
+{
+  "name": "stash-for-reddit",
+  "version": "1.2.3",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "dev": "node scripts/serve.js",
+    "package": "node scripts/package.js",
+    "dev:website": "python3 -m http.server 4174 --bind 127.0.0.1 --directory website"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "author": "Arthit Napradit",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arrpollo/Stash.git"
+  }
+}

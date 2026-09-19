@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Privacy notice — Stash</title>
+<meta name="author" content="Arthit Napradit" />
+<link rel="icon" href="assets/stash-icon-128.png" type="image/png" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #faf9f6; color: #292b26; font-family: Inter, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 18px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  a { color: #dc5632; text-decoration: none; }
+  a:hover { color: #b8421f; text-decoration: underline; }
+  h1, h2, h3 { font-family: Manrope, "Segoe UI", system-ui, sans-serif; font-weight: 700; margin: 0; letter-spacing: -0.01em; text-wrap: pretty; }
+  p, li { margin: 0; text-wrap: pretty; }
+</style>
+<style>
+  @font-face { font-family: "Manrope"; font-style: normal; font-weight: 200 800; font-display: swap; src: url("fonts/Manrope.woff2") format("woff2"); }
+  @font-face { font-family: "Inter"; font-style: normal; font-weight: 100 900; font-display: swap; src: url("fonts/Inter.woff2") format("woff2"); }
+  :focus-visible { outline: 3px solid #b8421f; outline-offset: 5px; }
+  section[id] { scroll-margin-top: 140px; }
+  a[style*="#dc5632"]:hover, a[style*="#292b26"]:hover { text-decoration: none; filter: brightness(0.94); }
+  details summary:hover { color: #b8421f; }
+</style>
+</head>
+<body>
+<div style="width: 100%;">
+  <header style="border-bottom: 1px solid #e4e1d8;">
+    <div style="max-width: 820px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
+      <a href="index.html" style="display: flex; align-items: center; gap: 10px; color: #292b26;">
+        <img src="assets/stash-icon-128.png" alt="Stash" width="28" height="28" style="width: 28px; height: 28px; border-radius: 8px; display: block;" />
+        <span style="font-family: Manrope, system-ui, sans-serif; font-weight: 700; font-size: 21px; letter-spacing: -0.02em;">stash<span style="color: #dc5632;">.</span></span>
+      </a>
+      <a href="index.html" style="margin-left: auto; font-size: 14px; color: #5c5f58;">← Back to site</a>
+    </div>
+  </header>
+
+  <main style="max-width: 820px; margin: 0 auto; padding: 64px 24px 96px;">
+    <span style="font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #5b7662;">Privacy notice</span>
+    <h1 style="font-size: clamp(28px, 4vw, 44px); line-height: 1.15; letter-spacing: -0.02em; margin-top: 16px;">What Stash stores, and what it sends<span style="color: #dc5632;">.</span></h1>
+    <p style="font-size: 18px; line-height: 1.65; color: #4a4d46; margin-top: 22px;">Stash is an independent local extension and is not affiliated with Reddit.</p>
+
+    <div style="background: #f8e4d9; border-radius: 16px; padding: 26px 28px; margin-top: 36px; display: grid; gap: 12px;">
+      <h2 style="font-size: 22px;">The short version</h2>
+      <p style="font-size: 15px; line-height: 1.65; color: #3c3f38;">Your library and settings stay in this Chrome profile. There is no app server, no Chrome Sync, no analytics, no third-party tracking, and no remote executable code. Networking still happens: syncing and unsaving go directly to Reddit with your signed-in browser session, and optional thumbnails are requested from Reddit’s image servers.</p>
+    </div>
+
+    <section style="margin-top: 48px; display: grid; gap: 14px;">
+      <h2 style="font-size: clamp(22px, 2.4vw, 28px);">What is stored locally</h2>
+      <p style="font-size: 16px; line-height: 1.7; color: #3c3f38;">The extension stores your Reddit username, saved post and comment text and metadata (including available thumbnail URLs and media types), favorites, reading status, sync time, and settings in Chrome’s local extension storage. This data is not sent to an app server or to Chrome Sync.</p>
+    </section>
+
+    <section style="margin-top: 40px; display: grid; gap: 14px;">
+      <h2 style="font-size: clamp(22px, 2.4vw, 28px);">Requests to Reddit</h2>
+      <p style="font-size: 16px; line-height: 1.7; color: #3c3f38;">When you choose to sync, Stash contacts Reddit directly using your browser’s signed-in session. It reads your session identity and your saved listing. When you explicitly confirm “Unsave from Reddit,” it sends an unsave request to Reddit. Temporary Reddit session tokens used for that request are not persisted or included in backups. The extension does not read cookie values or passwords.</p>
+      <p style="font-size: 16px; line-height: 1.7; color: #3c3f38;">Opening a Reddit link visits Reddit and is subject to Reddit’s own policies.</p>
+    </section>
+
+    <section style="margin-top: 40px; display: grid; gap: 14px;">
+      <h2 style="font-size: clamp(22px, 2.4vw, 28px);">Media thumbnails</h2>
+      <p style="font-size: 16px; line-height: 1.7; color: #3c3f38;">Media thumbnails are on by default and can be turned off in Settings &amp; backups; an existing choice to turn them off is preserved. While enabled, the browser requests visible previews directly from Reddit’s image servers: preview.redd.it, external-preview.redd.it, i.redd.it, a.thumbs.redditmedia.com, b.thumbs.redditmedia.com, and i.redditmedia.com. Those servers receive the requested image URL and normal connection information, such as your IP address. Image requests use a no-referrer policy.</p>
+      <p style="font-size: 16px; line-height: 1.7; color: #3c3f38;">The separate “Show NSFW thumbnails” switch is off by default: NSFW previews are requested only when you reveal one or enable that switch. Spoiler previews still require an individual reveal. Disabling media thumbnails stops future preview loads, including NSFW previews; images already requested may remain in the browser cache. Videos and GIFs use still previews, with no video playback in the library.</p>
+    </section>
+
+    <section style="margin-top: 40px; display: grid; gap: 14px;">
+      <h2 style="font-size: clamp(22px, 2.4vw, 28px);">The playback fallback on Reddit</h2>
+      <p style="font-size: 16px; line-height: 1.7; color: #3c3f38;">On www.reddit.com, Stash adds a “Play Reddit copy” button to supported RedGIFs posts, including cards in Saved and other feeds. It also observes explicit loading errors in RedGIFs embedded players, using a content script limited to HTTPS redgifs.com/ifr/* and www.redgifs.com/ifr/*. It does not run on watch pages or report standalone tabs. The error signal is relayed locally through Stash only to the Reddit page in the same tab and matched to that player’s post card; no error text, video content, or library data is sent to another server.</p>
+      <p style="font-size: 16px; line-height: 1.7; color: #3c3f38;">After a detected error or a manual click, Stash requests that post’s JSON from Reddit using the existing browser session, then plays an available MP4 from v.redd.it inside the post. Automatic lookups wait for the card to be onscreen; at most two run together. Automatic playback starts muted, and replacement videos pause offscreen or when the tab is hidden. No post-data or video request is made by this feature before a detected error or a click. Reddit receives normal connection information and may receive the page referrer during playback. The content scripts do not read the saved library, cookie values, or passwords, and do not persist post data or video files. “Original player” stops that card’s replacement playback, restores its original embed, and prevents another automatic attempt until you leave or refresh the page. This is separate from the still-image thumbnails in Stash’s library.</p>
+    </section>
+
+    <section style="margin-top: 40px; display: grid; gap: 14px;">
+      <h2 style="font-size: clamp(22px, 2.4vw, 28px);">Fonts and third parties</h2>
+      <p style="font-size: 16px; line-height: 1.7; color: #3c3f38;">There is no third-party tracking, analytics, hosted app backend, or remote executable code. Atkinson Hyperlegible and Lexend are bundled locally with the extension and do not make font-service requests.</p>
+    </section>
+
+    <section style="margin-top: 40px; display: grid; gap: 14px;">
+      <h2 style="font-size: clamp(22px, 2.4vw, 28px);">This website</h2>
+      <p style="font-size: 16px; line-height: 1.7; color: #3c3f38;">This website is hosted on Vercel. The hosting service handles normal connection information to serve pages and assets. Fonts are served from this site; no analytics or tracking scripts are included. Download and source links take you to GitHub, which has its own privacy policy.</p>
+    </section>
+    <section style="margin-top: 40px; display: grid; gap: 14px;">
+      <h2 style="font-size: clamp(22px, 2.4vw, 28px);">Backups</h2>
+      <p style="font-size: 16px; line-height: 1.7; color: #3c3f38;">Backup files include your username, cached Reddit text and metadata, available thumbnail URLs, and local annotations. They do not embed image files. They are ordinary, unencrypted JSON files saved to your chosen download location. Importing is processed locally and never modifies your Reddit saves; imported thumbnails follow the same preview setting.</p>
+    </section>
+
+    <section style="margin-top: 40px; display: grid; gap: 14px;">
+      <h2 style="font-size: clamp(22px, 2.4vw, 28px);">Deleting your data</h2>
+      <p style="font-size: 16px; line-height: 1.7; color: #3c3f38;">“Clear local library” deletes the extension’s saved library and annotations from this browser. Uninstalling the extension also removes local extension storage. Previously exported backup files remain wherever you saved them.</p>
+    </section>
+
+    <section style="margin-top: 40px; display: grid; gap: 14px;">
+      <h2 style="font-size: clamp(22px, 2.4vw, 28px);">Permissions, in plain terms</h2>
+      <ul style="margin: 0; padding-left: 0; list-style: none; display: grid; gap: 14px;">
+        <li style="border-left: 1px solid #dc5632; padding-left: 16px; font-size: 15px; line-height: 1.65; color: #3c3f38;"><strong>storage</strong> — saves the library and settings locally, not to Chrome Sync.</li>
+        <li style="border-left: 1px solid #dc5632; padding-left: 16px; font-size: 15px; line-height: 1.65; color: #3c3f38;"><strong>unlimitedStorage</strong> — prevents the usual local storage quota from cutting off a large text library.</li>
+        <li style="border-left: 1px solid #dc5632; padding-left: 16px; font-size: 15px; line-height: 1.65; color: #3c3f38;"><strong>www.reddit.com and old.reddit.com host access</strong> — allows authenticated sync and explicit unsave requests. A content script on www.reddit.com also adds the playback control to supported posts and reads that post’s JSON after a detected player error or a click.</li>
+        <li style="border-left: 1px solid #dc5632; padding-left: 16px; font-size: 15px; line-height: 1.65; color: #3c3f38;"><strong>RedGIFs embedded-player access</strong> — a content script limited to HTTPS redgifs.com/ifr/* and www.redgifs.com/ifr/*. It observes loading errors inside embedded players and sends an error signal through Stash to the Reddit post in the same tab.</li>
+      </ul>
+      <p style="font-size: 15px; line-height: 1.65; color: #5c5f58;">There is no general browsing-history permission and no cookie-reading permission.</p>
+    </section>
+
+    <div style="margin-top: 56px; border-top: 1px solid #e4e1d8; padding-top: 24px; font-size: 13px; line-height: 1.7; color: #8c8f86;">
+      <p>Stash is not affiliated with, endorsed by, or sponsored by Reddit. “Reddit” is a trademark of Reddit, Inc.</p>
+      <p style="margin-top: 8px;">Created by <a href="https://github.com/arrpollo">Arthit Napradit</a> · <a href="https://github.com/arrpollo/Stash">Free &amp; open source</a> · <a href="index.html">Back to Stash</a></p>
+    </div>
+  </main>
+</div>
+</body>
+</html>
